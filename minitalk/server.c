@@ -6,56 +6,59 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:47:20 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/17 16:32:08 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:19:42 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-# include "utils/libft/libft.h"
-# include "utils/ft_printf/ft_printf.h"
 
 t_bit_buffer	g_buffer = {0, 0};
 
-static void	handler_bit(int sig)
+static void reset_buffer(void)
 {
-	(void)context;
-	
-	if (sig == SIGUSR1)
-    {
-        g_buffer.byte = g_buffer.byte << 1;
-    }
-    else if
-    {
-        g_buffer.byte = (g_buffer.byte << 1) | 1; 
-    }
-    g_buffer.bite++;
+    g_buffer.byte = 0;
+    g_buffer.bit = 0;
 }
 
-static void process_byte()
+static void handler_bit(int sig)
 {
-     if (byte == '\0')
+    if (sig == SIGUSR1)
+        g_buffer.byte = g_buffer.byte << 1;
+    else if (sig == SIGUSR2)
+        g_buffer.byte = (g_buffer.byte << 1) | 1;
+    g_buffer.bit++;
+}
+
+static void process_byte(siginfo_t *info)
+{
+    unsigned char byte;
+
+    byte = g_buffer.byte;
+    if (byte == '\0')
     {
-        write(1, "\nMensaje recibido: ", 19);
-        write(1, &byte, 1);
-        printf("\nMensaje recibido completamente.\n");
-        exit(0);
+        ft_printf("\nMessage received.\n");
+
+        if (info && info->si_pid)
+        {
+            kill(info->si_pid, SIGUSR1);
+        }
+
+        reset_buffer();
     }
     else
     {
         write(1, &byte, 1);
+        reset_buffer();
     }
 }
 
 static void signal_handler(int sig, siginfo_t *info, void *context)
 {
     handler_bit(sig);
+    (void)context;
 
     if (g_buffer.bit == 8)
-    {
-        process_byte(g_buffer.byte);
-        g_buffer.byte = 0;
-        g_buffer.bit = 0;
-    }
+        process_byte(info);
 }
 
 int main (void)
@@ -70,16 +73,16 @@ int main (void)
     // Configurar los manejadores para SIGUSR1 y SIGUSR2
     if (sigaction(SIGUSR1, &sa, NULL) == -1)
     {
-        ft_printf("Error al configurar SIGUSR1");
+        ft_printf("Error setting up SIGUSR1.\n");
         exit(EXIT_FAILURE);
     }
     if (sigaction(SIGUSR2, &sa, NULL) == -1)
     {
-        ft_printf("Error al configurar SIGUSR2");
+        ft_printf("Error setting up SIGUSR2.\n");
         exit(EXIT_FAILURE);
     }
 
-    printf("Servidor iniciado. PID: %d\n", getpid());
+    printf("Server started. PID: %d\n", getpid());
 
     while (1)
     {
