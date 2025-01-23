@@ -6,35 +6,34 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/23 16:31:58 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:22:36 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/**
- * @warning MALLOC
- */
-t_bool	malloc_number_to_stack(t_stack *stack, int nbr) 
-{
-	t_node	*new_node;
-	t_node	*current_node;
 
-	new_node = lst_malloc_node(nbr);
-	if (!new_node)
+t_bool	ft_atoi_check(const char *str, int *result, int *str_index)
+{
+	int					sign;
+	long				temp_result;
+
+	sign = 1;
+	temp_result = 0;
+	while (ft_isspace(str[*str_index]))
+		*str_index = *str_index + 1;
+	if (str[*str_index] == '-')
+		sign = -1;
+	if (str[*str_index] == '+' || str[*str_index] == '-')
+		*str_index = *str_index + 1;
+	while (ft_isdigit(str[*str_index]))
 	{
-		printf("Error: No se pudo crear el nodo\n");
-		return (FALSE);
+		temp_result = (temp_result * 10) + str[*str_index] - '0';
+		if ((sign == 1 && temp_result > (long)INT_MAX) ||
+		(sign == -1 && -temp_result < (long)INT_MIN))
+			return (FALSE);
+		*str_index = *str_index + 1;
 	}
-	if (stack->node == NULL)
-		stack->node = new_node;
-	else
-	{
-		current_node = stack->node;
-		while (current_node->next != NULL)
-			current_node = current_node->next;
-		current_node->next = new_node;
-	}
-	stack->size++;
+	*result = temp_result * sign;
 	return (TRUE);
 }
 
@@ -43,20 +42,23 @@ t_bool	malloc_number_to_stack(t_stack *stack, int nbr)
  */
 t_bool	malloc_fill_stack(t_stack	*stack_a, int argc, char **argv)
 {
-	int		index;
+	int		arg_index;
 	int		str_index;
+	int		temp_nbr;
 
-	index = 1;
-	while (index < argc)
+	arg_index = 1;
+	while (arg_index < argc)
 	{
 		str_index = 0;
-		while (argv[index][str_index])
+		while (argv[arg_index][str_index])
 		{
-			while (argv[index][str_index] == ' ')
-				str_index++;
+			if (ft_atoi_check(argv[arg_index], &temp_nbr, &str_index) == FALSE)
+				return (FALSE);
 			
 		}
+		arg_index++;
 	}
+	return (TRUE);
 }
 
 int	main(int argc, char **argv)
@@ -72,10 +74,8 @@ int	main(int argc, char **argv)
 	stacks.stack_b.node = NULL;
 	if (check_numbers(argc, argv) == TRUE)
 	{
-		/*if (malloc_fill_stack(&(stacks.stack_a), argc, argv) == FALSE)
-		{
-			
-		}*/
+		if (malloc_fill_stack(&(stacks.stack_a), argc, argv) == FALSE)
+			return (printf("jajasalu2\n"), 1);
 		printf("Todo ok\n");
 	}
 	else

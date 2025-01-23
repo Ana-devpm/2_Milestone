@@ -6,7 +6,7 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 10:22:23 by afailde-          #+#    #+#              #
-#    Updated: 2025/01/21 19:20:24 by afailde-         ###   ########.fr        #
+#    Updated: 2025/01/23 18:25:36 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC			=	ft_atoi.c \
 				ft_lstclear_bonus.c \
 				ft_lstiter_bonus.c \
 				ft_lstmap_bonus.c \
+				ft_isspace.c \
 				ft_printf.c \
 				ft_printf_utils.c
 
