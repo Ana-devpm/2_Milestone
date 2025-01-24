@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:29:57 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/23 16:13:34 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:20:35 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,23 @@ t_bool	check_numbers(int argc, char **argv)
 	return (TRUE);
 }
 
-//No pueden repetirse los números.
+t_bool	stack_check_dups(t_stack stack_a)
+{
+	t_node	*node_iter;
+	t_node	*tmp_node;
+	
+	node_iter = stack_a.node;
+	while (node_iter != NULL && node_iter->next != NULL)
+	{
+		tmp_node = node_iter->next;
+		while (tmp_node != NULL)
+		{
+			if (node_iter->nbr == tmp_node->nbr)
+			{
+				return (FALSE);
+			}
+			tmp_node = tmp_node->next;	
+		}
+		node_iter = node_iter->next;
+	}
+}

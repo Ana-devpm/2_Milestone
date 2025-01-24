@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/23 18:22:36 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:24:18 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,62 @@ t_bool	malloc_fill_stack(t_stack	*stack_a, int argc, char **argv)
 		while (argv[arg_index][str_index])
 		{
 			if (ft_atoi_check(argv[arg_index], &temp_nbr, &str_index) == FALSE)
-				return (FALSE);
-			
+				return (stack_clean(&stack_a->node), FALSE);
+			if (malloc_number_to_stack(stack_a, temp_nbr) == FALSE)
+				return (stack_clean(&stack_a->node), FALSE);
 		}
 		arg_index++;
 	}
 	return (TRUE);
 }
 
+static void show_stacks(t_stacks stacks)
+{
+	t_node	*a;
+	t_node	*b;
+	int		i;
+
+	a = stacks.stack_a.node;
+	i = 0;
+	printf("Stack a:\n");
+	while (a)
+	{
+		printf("Nodo %d\t\t->\t%d\tindex: %lu\n", i++, a->nbr, a->index);
+		a = a->next;
+	}
+	b = stacks.stack_b.node;
+	i = 0;
+	printf("\nStack b:\n");
+	while (b)
+	{
+		printf("Nodo número %d\t\t->\t%d\tindex: %lu\n", i++, b->nbr, b->index);
+		b = b->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks	stacks;
+	t_node		*a;
+	int			i;
 
 	if (argc < 2)
-	{
-		printf("Por favor, pasa una secuencia de números como argumentos.\n");
-		return (1);
-	}
+		return (printf(ARG_ERR_MSG), 1);
 	stacks.stack_a.node = NULL;
+	stacks.stack_a.size = 0;
 	stacks.stack_b.node = NULL;
+	stacks.stack_b.size = 0;
 	if (check_numbers(argc, argv) == TRUE)
 	{
 		if (malloc_fill_stack(&(stacks.stack_a), argc, argv) == FALSE)
-			return (printf("jajasalu2\n"), 1);
-		printf("Todo ok\n");
+			return (printf("Error\n"), 1);
+		if (stack_check_dups(stacks.stack_a) == FALSE)
+			return (stack_clean(&stacks.stack_a.node), printf("Error\n"), 1);
 	}
 	else
-		printf("Error\n");
+		return (printf("Error\n"), 1);
+	show_stacks(stacks);
+	stack_clean(&stacks.stack_a.node);
+	stack_clean(&stacks.stack_b.node);
 	return (0);
 }
