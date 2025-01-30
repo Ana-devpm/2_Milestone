@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:33:02 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:14:07 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:42:55 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	rotate_b(t_stack *stack_b)
 	temp_node = stack_b->node;
 	stack_b->node = temp_node->next;
 	current_node = stack_b->node;
-	while(current_node->next != NULL)
+	while (current_node->next != NULL)
 	{
 		current_node = current_node->next;
 	}
 	current_node->next = temp_node;
-	temp_node->next = NULL; 
+	temp_node->next = NULL;
 }
 
 void	rotate_both(t_stacks *stacks)

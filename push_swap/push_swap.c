@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/24 18:24:18 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:54:54 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void show_stacks(t_stacks stacks)
 
 	a = stacks.stack_a.node;
 	i = 0;
-	printf("Stack a:\n");
+	printf("Stack a, size %lu:\n", stacks.stack_a.size);
 	while (a)
 	{
 		printf("Nodo %d\t\t->\t%d\tindex: %lu\n", i++, a->nbr, a->index);
@@ -78,12 +78,38 @@ static void show_stacks(t_stacks stacks)
 	}
 	b = stacks.stack_b.node;
 	i = 0;
-	printf("\nStack b:\n");
+	printf("\nStack b, size %lu:\n", stacks.stack_b.size);
 	while (b)
 	{
 		printf("Nodo número %d\t\t->\t%d\tindex: %lu\n", i++, b->nbr, b->index);
 		b = b->next;
 	}
+}
+
+static t_bool	indexer(t_stacks stacks)
+{
+	t_node	*current_node;
+	t_node	*compare_node;
+	size_t	index;
+
+	if (!stacks.stack_a.node || !stacks.stack_a.size)
+		return (FALSE);
+	current_node = stacks.stack_a.node;
+	while (current_node)
+	{
+		index = 0;
+		compare_node = stacks.stack_a.node;
+		while(compare_node)
+		{
+			if (compare_node->nbr < current_node->nbr)
+				index++;
+			compare_node = compare_node->next;
+		}
+		current_node->index = index;
+		current_node = current_node->next;
+	}
+	stacks.stack_a.size = index + 1;
+	return (TRUE);
 }
 
 int	main(int argc, char **argv)
@@ -102,11 +128,16 @@ int	main(int argc, char **argv)
 	{
 		if (malloc_fill_stack(&(stacks.stack_a), argc, argv) == FALSE)
 			return (printf("Error\n"), 1);
-		if (stack_check_dups(stacks.stack_a) == FALSE)
+		if (stack_check_dups(stacks.stack_a) == FALSE || indexer(stacks))
 			return (stack_clean(&stacks.stack_a.node), printf("Error\n"), 1);
 	}
 	else
 		return (printf("Error\n"), 1);
+	
+	if (is_sorted(&stacks.stack_a) == FALSE)
+	{
+		printf("Stack no ordenado\n");
+	}
 	show_stacks(stacks);
 	stack_clean(&stacks.stack_a.node);
 	stack_clean(&stacks.stack_b.node);

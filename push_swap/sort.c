@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:18:09 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:41:56 by afailde-         ###   ########.fr       */
+/*   Created: 2025/01/30 14:32:24 by afailde-          #+#    #+#             */
+/*   Updated: 2025/01/30 16:54:52 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_isspace(char c)
+t_bool	is_sorted(t_stack *stack_a)
 {
-	return (c == 32 || (c >= 9 && c <= 13));
+	t_node	*current_node;
+
+	if (!stack_a || stack_a->size < 1)
+		return (TRUE);
+	current_node = stack_a->node;
+	while (current_node->next)
+	{
+		if (current_node->index > current_node->next->index)
+			return (FALSE);
+		current_node = current_node->next;
+	}
+	return (TRUE);
+}
+
+void	sorter()
+{
+
 }
