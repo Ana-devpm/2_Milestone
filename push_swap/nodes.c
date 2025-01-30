@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:06:23 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/24 15:03:36 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:41:22 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	stack_clean(t_node **node)
 		curr_node = aux_node;
 	}
 	*node = NULL;
-}	
+}
 
 /**
  * @warning MALLOC
