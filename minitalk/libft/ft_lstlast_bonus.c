@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:01 by afailde-         ###   ########.fr       */
+/*   Created: 2024/03/11 10:43:43 by afailde-          #+#    #+#             */
+/*   Updated: 2024/03/20 12:20:55 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-typedef struct s_bit_buffer
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	byte;
-	int	bit;
-}		t_bit_buffer;
-
-#endif
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}

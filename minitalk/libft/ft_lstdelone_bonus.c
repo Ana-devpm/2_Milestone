@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:01 by afailde-         ###   ########.fr       */
+/*   Created: 2024/03/11 13:40:01 by afailde-          #+#    #+#             */
+/*   Updated: 2024/03/20 12:17:31 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-typedef struct s_bit_buffer
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	byte;
-	int	bit;
-}		t_bit_buffer;
-
-#endif
+	if (!lst || !del)
+		return ;
+	(del)(lst->content);
+	free(lst);
+	lst = NULL;
+}

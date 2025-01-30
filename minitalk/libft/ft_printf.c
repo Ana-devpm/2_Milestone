@@ -6,11 +6,11 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:20:45 by afailde-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:43:06 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:18:09 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	ft_putchar(char c, int *index)
 {

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:01 by afailde-         ###   ########.fr       */
+/*   Created: 2024/01/18 14:07:17 by afailde-          #+#    #+#             */
+/*   Updated: 2024/03/18 10:27:38 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-typedef struct s_bit_buffer
+char	*ft_strnstr(const char *str, const char *sb_str, size_t len)
 {
-	int	byte;
-	int	bit;
-}		t_bit_buffer;
+	unsigned int	i;
+	unsigned int	j;
 
-#endif
+	i = 0;
+	j = 0;
+	if (sb_str[j] == '\0')
+		return ((char *)str);
+	while (str[i] != '\0')
+	{
+		while (((i + j) < len) && (str[i + j] == sb_str[j])
+			&& (sb_str[j] != '\0'))
+			j++;
+		if (sb_str[j] == '\0')
+			return ((char *)&str[i]);
+		i++;
+		j = 0;
+	}
+	return (0);
+}

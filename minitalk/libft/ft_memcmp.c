@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:01 by afailde-         ###   ########.fr       */
+/*   Created: 2024/01/18 10:29:31 by afailde-          #+#    #+#             */
+/*   Updated: 2024/03/18 10:01:23 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-typedef struct s_bit_buffer
+int	ft_memcmp(const void *string1, const void *string2, size_t num)
 {
-	int	byte;
-	int	bit;
-}		t_bit_buffer;
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
 
-#endif
+	if (num == 0)
+		return (0);
+	ptr1 = (unsigned char *) string1;
+	ptr2 = (unsigned char *) string2;
+	while ((*ptr1 == *ptr2) && num -1 > 0)
+	{
+		ptr1++;
+		ptr2++;
+		num--;
+	}
+	return ((int)(*ptr1 - *ptr2));
+}

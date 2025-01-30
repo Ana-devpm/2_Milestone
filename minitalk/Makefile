@@ -6,13 +6,13 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 15:48:43 by afailde-          #+#    #+#              #
-#    Updated: 2025/01/20 19:23:47 by afailde-         ###   ########.fr        #
+#    Updated: 2025/01/21 19:52:41 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilador y banderas
 CC				=	cc
-FLAGS			=	-Wextra -Werror -Wall
+FLAGS			=	-Wextra -Werror -Wall -g3 -fsanitize=address
 RM				=	rm -f
 
 # Ejecutables
@@ -22,31 +22,27 @@ NAME_CLIENT		=	client
 # Fuentes y objetos del servidor, cliente y utils
 SERVER_SRC      =	server.c
 CLIENT_SRC      =	client.c
-UTILS_SRC       =	utils_libft.c
+LIBFT			=	libft/libft.a
 SERVER_OBJ      =	server.o
 CLIENT_OBJ      =	client.o
-UTILS_OBJ       =	utils_libft.o
-
-# Carpeta y fuentes de ft_printf
-FT_PRINTF_DIR   =	utils/ft_printf
-FT_PRINTF_SRC   =	$(wildcard $(FT_PRINTF_DIR)/*.c)
-FT_PRINTF_OBJ   =	$(FT_PRINTF_SRC:.c=.o)
 
 # Objetivo principal
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
 # Compilar el servidor
-$(NAME_SERVER): $(SERVER_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ)
+$(NAME_SERVER): $(SERVER_OBJ) $(LIBFT) 
 	@echo "Compilando $(NAME_SERVER)..."
-	$(CC) $(FLAGS) $(SERVER_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ) -o $(NAME_SERVER)
+	$(CC) $(FLAGS) $(SERVER_OBJ) $(LIBFT) -o $(NAME_SERVER)
 	@echo "$(NAME_SERVER) creado."
 
 # Compilar el cliente
-$(NAME_CLIENT): $(CLIENT_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ)
+$(NAME_CLIENT): $(CLIENT_OBJ) $(LIBFT)
 	@echo "Compilando $(NAME_CLIENT)..."
-	$(CC) $(FLAGS) $(CLIENT_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ) -o $(NAME_CLIENT)
+	$(CC) $(FLAGS) $(CLIENT_OBJ) $(LIBFT) -o $(NAME_CLIENT)
 	@echo "$(NAME_CLIENT) creado."
 
+$(LIBFT):
+	make -sC libft
 # Regla genérica para compilar archivos .c en .o
 %.o: %.c
 	@echo "Compilando $< en $@..."
@@ -54,8 +50,9 @@ $(NAME_CLIENT): $(CLIENT_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ)
 
 # Limpiar archivos objeto
 clean:
+	make -sC libft fclean
 	@echo "Limpiando proyecto principal..."
-	$(RM) $(SERVER_OBJ) $(CLIENT_OBJ) $(UTILS_OBJ) $(FT_PRINTF_OBJ)
+	$(RM) $(SERVER_OBJ) $(CLIENT_OBJ)
 
 # Limpieza completa
 fclean: clean

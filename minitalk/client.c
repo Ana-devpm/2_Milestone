@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:47:17 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 12:15:58 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:33:25 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,38 +65,20 @@ int	is_valid_pid(char *str)
 	return (1);
 }
 
-int main (int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
+	pid_t	server_pid;
+	char	*message;
+
 	if (argc != 3)
-	{
-		ft_printf("Usage: ./client <server PID> <message>\n");
-		return 1; 
-	}
-	
-	if (!is_valid_pid(argv[1]))
-    {
-        ft_printf("Error: Server PID is not a valid number.\n");
-        return (1);
-    }
-
-	pid_t server_pid = ft_atoi(argv[1]); // Convertir el argumento a un número
-    if (server_pid <= 0) // Verificar que el PID sea mayor que 0
-    {
-        ft_printf("Error: Invalid server PID. Try Again.\n");
-        return (1);
-    }
-
-    // Verificar si el PID pertenece a un proceso activo
-    if (kill(server_pid, 0) == -1)
-    {
-        ft_printf("Error: Unable to verify the server.");
-        return (1);
-    }
-	
-    char *message = argv[2];
-    send_message(server_pid, message);
-
-    printf("Message sent to the server with PID %d: %s\n", server_pid, message);
-
+		return (ft_printf ("Usage: ./client <server PID> <message>\n"), 1);
+	server_pid = ft_atoi(argv[1]);
+	if (!is_valid_pid(argv[1]) || (server_pid <= 0))
+		return (ft_printf ("Error: Server PID is not a valid number.\n"), 1);
+	if (kill(server_pid, 0) == -1)
+		return (ft_printf ("Error: Unable to verify the server."), 1);
+	message = argv[2];
+	send_message(server_pid, message);
+	printf("Message sent to the server with PID %d: %s\n", server_pid, message);
 	return (0);
 }

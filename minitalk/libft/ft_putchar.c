@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/21 19:38:01 by afailde-         ###   ########.fr       */
+/*   Created: 2024/05/30 15:17:54 by afailde-          #+#    #+#             */
+/*   Updated: 2025/01/23 11:39:32 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-typedef struct s_bit_buffer
+int	putchar(int c)
 {
-	int	byte;
-	int	bit;
-}		t_bit_buffer;
-
-#endif
+	write (1, &c, 1);
+	return (c);
+}
