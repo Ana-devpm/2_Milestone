@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:11:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/24 15:32:33 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:52:27 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 # include <limits.h>
 # include "libft/libft.h"
 
-typedef int t_bool;
+typedef int	t_bool;
 # define TRUE 0 
 # define FALSE 1
 
-# define ARG_ERR_MSG "Por favor, pasa una secuencia de números como argumentos.\n"
+# define ARG_ERR_MSG "Error.\n"
 
 typedef struct	s_node
 {
-	size_t	index; 
-	int		nbr;
-	struct	s_node *next;
+	size_t			index;
+	int				nbr;
+	struct s_node	*next;
 }	t_node;
 
 typedef struct	s_stack
@@ -36,7 +36,7 @@ typedef struct	s_stack
 	t_node	*node;
 }	t_stack;
 
-typedef	struct 	s_stacks
+typedef	struct	s_stacks
 {
 	t_stack		stack_a;
 	t_stack		stack_b;
