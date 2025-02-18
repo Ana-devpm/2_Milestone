@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:06:23 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 09:41:22 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/18 20:42:53 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ t_bool	malloc_number_to_stack(t_stack	*stack, int nbr)
 
 	new_node = lst_malloc_node(nbr);
 	if (!new_node)
-	{
-		printf("Error: No se pudo crear el nodo\n");
 		return (FALSE);
-	}
 	if (stack->node == NULL)
 		stack->node = new_node;
 	else

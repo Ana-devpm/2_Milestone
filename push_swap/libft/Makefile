@@ -6,7 +6,7 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/16 10:22:23 by afailde-          #+#    #+#              #
-#    Updated: 2025/01/23 18:25:36 by afailde-         ###   ########.fr        #
+#    Updated: 2025/02/18 19:51:54 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 NAME	=	libft.a
 SRC			=	ft_atoi.c \
+				ft_squareroot.c \
 				ft_bzero.c \
 				ft_calloc.c \
 				ft_isalnum.c \

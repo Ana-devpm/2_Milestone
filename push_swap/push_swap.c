@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 16:54:54 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:21:23 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ int	main(int argc, char **argv)
 	
 	if (is_sorted(&stacks.stack_a) == FALSE)
 	{
-		printf("Stack no ordenado\n");
+		sorter(&stacks, stacks.stack_a.size);
 	}
-	show_stacks(stacks);
+	//show_stacks(stacks);
 	stack_clean(&stacks.stack_a.node);
 	stack_clean(&stacks.stack_b.node);
 	return (0);

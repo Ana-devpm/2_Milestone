@@ -6,13 +6,13 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:32:56 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:43:45 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:36:38 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	reverse_rot_a(t_stack *stack_a)
+void	reverse_rot_a(t_stack *stack_a, t_bool print)
 {
 	t_node	*current_node;
 	t_node	*temp_node;
@@ -28,14 +28,16 @@ void	reverse_rot_a(t_stack *stack_a)
 	current_node->next = NULL;
 	temp_node->next = stack_a->node;
 	stack_a->node = temp_node;
+	if (print == TRUE)
+		write(1, "rra\n", 4);
 }
 
-void	reverse_rot_b(t_stack *stack_b)
+void	reverse_rot_b(t_stack *stack_b, t_bool print)
 {
 	t_node	*current_node;
 	t_node	*temp_node;
 
-	if (!stack_b || !stack_b->node || stack_b->node->next)
+	if (!stack_b || !stack_b->node || !stack_b->node->next)
 		return ;
 	current_node = stack_b->node;
 	while (current_node->next->next != NULL)
@@ -46,12 +48,16 @@ void	reverse_rot_b(t_stack *stack_b)
 	current_node->next = NULL;
 	temp_node->next = stack_b->node;
 	stack_b->node = temp_node;
+	if (print == TRUE)
+		write(1, "rrb\n", 4);
 }
 
-void	reverse_rot_both(t_stacks *stacks)
+void	reverse_rot_both(t_stacks *stacks, t_bool print)
 {
 	if (!stacks)
 		return ;
-	reverse_rot_a (&stacks->stack_a);
-	reverse_rot_b (&stacks->stack_b);
+	reverse_rot_a (&stacks->stack_a, FALSE);
+	reverse_rot_b (&stacks->stack_b, FALSE);
+	if (print == TRUE)
+		write(1, "rrr\n", 4);
 }

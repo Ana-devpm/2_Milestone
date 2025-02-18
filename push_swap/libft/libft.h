@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 14:38:06 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/23 18:25:54 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:51:59 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void	*content);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int 	ft_squareroot(int n);
 int		ft_isalpha(int character);
 int		ft_isspace(char c);
 int		ft_isdigit(int num);
