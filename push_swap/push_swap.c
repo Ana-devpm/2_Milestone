@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/03 17:21:23 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:38:11 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,6 @@ t_bool	malloc_fill_stack(t_stack	*stack_a, int argc, char **argv)
 	return (TRUE);
 }
 
-static void show_stacks(t_stacks stacks)
-{
-	t_node	*a;
-	t_node	*b;
-	int		i;
-
-	a = stacks.stack_a.node;
-	i = 0;
-	printf("Stack a, size %lu:\n", stacks.stack_a.size);
-	while (a)
-	{
-		printf("Nodo %d\t\t->\t%d\tindex: %lu\n", i++, a->nbr, a->index);
-		a = a->next;
-	}
-	b = stacks.stack_b.node;
-	i = 0;
-	printf("\nStack b, size %lu:\n", stacks.stack_b.size);
-	while (b)
-	{
-		printf("Nodo número %d\t\t->\t%d\tindex: %lu\n", i++, b->nbr, b->index);
-		b = b->next;
-	}
-}
-
 static t_bool	indexer(t_stacks stacks)
 {
 	t_node	*current_node;
@@ -115,8 +91,6 @@ static t_bool	indexer(t_stacks stacks)
 int	main(int argc, char **argv)
 {
 	t_stacks	stacks;
-	t_node		*a;
-	int			i;
 
 	if (argc < 2)
 		return (printf(ARG_ERR_MSG), 1);
@@ -135,10 +109,7 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 1);
 	
 	if (is_sorted(&stacks.stack_a) == FALSE)
-	{
 		sorter(&stacks, stacks.stack_a.size);
-	}
-	//show_stacks(stacks);
 	stack_clean(&stacks.stack_a.node);
 	stack_clean(&stacks.stack_b.node);
 	return (0);

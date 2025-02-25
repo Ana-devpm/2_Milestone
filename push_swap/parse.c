@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:29:57 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 09:44:09 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:39:02 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ t_bool	stack_check_dups(t_stack stack_a)
 		}
 		node_iter = node_iter->next;
 	}
+	return (TRUE);
 }
