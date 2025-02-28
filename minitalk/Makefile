@@ -6,61 +6,72 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 15:48:43 by afailde-          #+#    #+#              #
-#    Updated: 2025/01/21 19:52:41 by afailde-         ###   ########.fr        #
+#    Updated: 2025/02/25 16:05:33 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compilador y banderas
-CC				=	cc
-FLAGS			=	-Wextra -Werror -Wall -g3 -fsanitize=address
-RM				=	rm -f
+# Compiler and flags
+CC              =   cc
+FLAGS           =   -Wextra -Werror -Wall -g3 -fsanitize=address
+RM              =   rm -f
 
-# Ejecutables
-NAME_SERVER     =	server
-NAME_CLIENT		=	client
+# Colors
+GREEN       =   \e[0;32m
+YELLOW      =   \e[0;33m
+BLUE        =   \e[0;34m
+RED         =   \e[0;31m
+NC          =   \e[0m  # No Color (reset)
 
-# Fuentes y objetos del servidor, cliente y utils
-SERVER_SRC      =	server.c
-CLIENT_SRC      =	client.c
-LIBFT			=	libft/libft.a
-SERVER_OBJ      =	server.o
-CLIENT_OBJ      =	client.o
+# Executables
+NAME_SERVER     =   server
+NAME_CLIENT     =   client
 
-# Objetivo principal
+# Source files and objects for server, client, and utils
+SERVER_SRC      =   server.c
+CLIENT_SRC      =   client.c
+LIBFT           =   libft/libft.a
+SERVER_OBJ      =   server.o
+CLIENT_OBJ      =   client.o
+
+# Main target
 all: $(NAME_SERVER) $(NAME_CLIENT)
 
-# Compilar el servidor
+# Compile the server
 $(NAME_SERVER): $(SERVER_OBJ) $(LIBFT) 
-	@echo "Compilando $(NAME_SERVER)..."
+	@echo -e "$(YELLOW)⚙️  Compiling $(NAME_SERVER)...$(NC)"
 	$(CC) $(FLAGS) $(SERVER_OBJ) $(LIBFT) -o $(NAME_SERVER)
-	@echo "$(NAME_SERVER) creado."
+	@echo -e "$(GREEN)✅ $(NAME_SERVER) created!$(NC)"
 
-# Compilar el cliente
+# Compile the client
 $(NAME_CLIENT): $(CLIENT_OBJ) $(LIBFT)
-	@echo "Compilando $(NAME_CLIENT)..."
+	@echo -e "$(YELLOW)⚙️  Compiling $(NAME_CLIENT)...$(NC)"
 	$(CC) $(FLAGS) $(CLIENT_OBJ) $(LIBFT) -o $(NAME_CLIENT)
-	@echo "$(NAME_CLIENT) creado."
+	@echo -e "$(GREEN)✅ $(NAME_CLIENT) created!$(NC)"
 
+# Compile libft
 $(LIBFT):
-	make -sC libft
-# Regla genérica para compilar archivos .c en .o
+	@echo -e "$(BLUE)📚 Compiling Libft...$(NC)"
+	@make -sC libft
+	@echo -e "$(GREEN)✅ Libft compiled successfully!$(NC)"
+
+# Generic rule to compile .c files into .o
 %.o: %.c
-	@echo "Compilando $< en $@..."
+	@echo -e "$(BLUE)🛠️  Compiling $< into $@...$(NC)"
 	$(CC) $(FLAGS) -c $< -o $@
 
-# Limpiar archivos objeto
+# Clean object files
 clean:
-	make -sC libft fclean
-	@echo "Limpiando proyecto principal..."
+	@make -sC libft fclean
+	@echo -e "$(RED)🗑️  Cleaning main project...$(NC)"
 	$(RM) $(SERVER_OBJ) $(CLIENT_OBJ)
 
-# Limpieza completa
+# Full cleanup
 fclean: clean
-	@echo "Eliminando ejecutables..."
+	@echo -e "$(RED)🚮 Removing executables...$(NC)"
 	$(RM) $(NAME_SERVER) $(NAME_CLIENT)
 
-# Reconstruir todo
+# Rebuild everything
 re: fclean all
 
-# Declarar objetivos que no son archivos
+# Declare targets that are not files
 .PHONY: all clean fclean re

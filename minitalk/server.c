@@ -6,18 +6,24 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:47:20 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:39:00 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:28:35 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-t_bit_buffer	g_buffer = {0, 0};
+t_bit_buffer	g_buffer = {0, 0, NULL};
 
 static void	reset_buffer(void)
 {
 	g_buffer.byte = 0;
 	g_buffer.bit = 0;
+
+	if(g_buffer.str)
+	{
+		free(g_buffer.str);
+		g_buffer.str = NULL;
+	}
 }
 
 static void	handler_bit(int sig)
@@ -28,7 +34,26 @@ static void	handler_bit(int sig)
 		g_buffer.byte = (g_buffer.byte << 1) | 1;
 	g_buffer.bit++;
 }
-
+static char	*malloc_build_str(char	*str, char byte)
+{
+	int		len;
+	char	*final_str;
+	
+	len = 0;
+	if (str)
+		len = ft_strlen(str);
+	final_str = malloc((len + 2) * sizeof(char));
+	if (!final_str)
+		return (NULL);
+	if (final_str)
+	{
+		ft_memcpy(final_str, str, len);
+		free(str);
+	}
+	final_str[len] = byte;
+	final_str[len + 1] = '\0';
+	return (final_str);
+}
 static void	process_byte(siginfo_t *info)
 {
 	unsigned char	byte;
@@ -36,7 +61,7 @@ static void	process_byte(siginfo_t *info)
 	byte = g_buffer.byte;
 	if (byte == '\0')
 	{
-		ft_printf("\nMessage received.\n");
+		ft_printf("\nMessage received. %s\n", g_buffer.str);
 		if (info && info->si_pid)
 		{
 			kill(info->si_pid, SIGUSR1);
@@ -44,11 +69,10 @@ static void	process_byte(siginfo_t *info)
 		reset_buffer();
 	}
 	else
-	{
-		write(1, &byte, 1);
-		reset_buffer();
+		g_buffer.str = malloc_build_str(g_buffer.str, byte);
+	g_buffer.byte = 0;
+	g_buffer.bit = 0;
 	}
-}
 
 static void	signal_handler(int sig, siginfo_t *info, void *context)
 {
