@@ -6,7 +6,7 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 12:26:42 by afailde-          #+#    #+#              #
-#    Updated: 2025/02/25 15:54:37 by afailde-         ###   ########.fr        #
+#    Updated: 2025/02/25 16:07:07 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,9 @@ LIBFT		=	libft/libft.a
 
 #Compile libft
 $(LIBFT):
-	make -sC libft
-
+	@echo -e "$(BLUE)📚 Compiling Libft...$(NC)"
+	@make -sC libft
+	@echo -e "$(GREEN)✅ Libft compiled successfully!$(NC)"
 #Compile push_swap
 $(NAME): $(OBJ) $(LIBFT)
 	@echo -e "$(YELLOW)Compiling $(NAME)...$(NC)"
