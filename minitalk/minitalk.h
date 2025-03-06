@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 14:08:11 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/28 17:10:19 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:12:40 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct s_bit_buffer
 {
 	unsigned char	byte;
-	int				bit;
+	unsigned int	bit;
 	char			*str;
 }		t_bit_buffer;
 

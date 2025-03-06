@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:47:17 by afailde-          #+#    #+#             */
-/*   Updated: 2025/01/23 11:33:25 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:58:23 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 static void	send_bits(pid_t pid, int bit)
 {
 	if (bit == 0)
-	{
 		kill(pid, SIGUSR1);
-	}
 	else
-	{
 		kill(pid, SIGUSR2);
-	}
-	usleep(100);
+	usleep(120);
 }
 
 //Send the message bit by bit.

@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 15:47:20 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/28 16:28:35 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:17:01 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,16 @@ static void	process_byte(siginfo_t *info)
 	byte = g_buffer.byte;
 	if (byte == '\0')
 	{
-		ft_printf("\nMessage received. %s\n", g_buffer.str);
+		ft_printf("\nMessage: %s\n", g_buffer.str);
 		if (info && info->si_pid)
-		{
 			kill(info->si_pid, SIGUSR1);
-		}
 		reset_buffer();
 	}
 	else
 		g_buffer.str = malloc_build_str(g_buffer.str, byte);
 	g_buffer.byte = 0;
 	g_buffer.bit = 0;
-	}
+}
 
 static void	signal_handler(int sig, siginfo_t *info, void *context)
 {
