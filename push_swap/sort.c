@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:32:24 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/18 20:35:51 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:50:36 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ t_bool	is_sorted(t_stack *stack_a)
 	return (TRUE);
 }
 
-void k_sort2(t_stack *stack_a, t_stack *stack_b)
+void	k_sort2(t_stack *stack_a, t_stack *stack_b)
 {
 	size_t	cost_ra;
+
 	while (stack_b->size != 0)
 	{
 		cost_ra = mov_cost_ra(stack_b, stack_b->size - 1);
@@ -45,7 +46,7 @@ void k_sort2(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void k_sort1(t_stack *stack_a, t_stack *stack_b)
+void	k_sort1(t_stack *stack_a, t_stack *stack_b)
 {
 	size_t	counter;
 	size_t	magic_number;

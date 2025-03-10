@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:31:08 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/03 17:27:22 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:29:58 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ void	sorter_4(t_stack *stack_a, t_stack *stack_b)
 
 void	sorter_5(t_stack *stack_a, t_stack *stack_b)
 {
-
 	size_t	mov;
-	size_t 	min;
+	size_t	min;
 
 	min = get_min(stack_a);
 	mov = mov_cost_ra(stack_a, min);

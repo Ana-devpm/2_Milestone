@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:44:12 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/03 16:18:35 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:51:02 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	swap_b(t_stack *stack_b, t_bool print)
 	stack_b->node = sec_node;
 	if (print == TRUE)
 		write(1, "sb\n", 3);
-
 }
 
 void	doble_swap(t_stacks *stacks, t_bool print)

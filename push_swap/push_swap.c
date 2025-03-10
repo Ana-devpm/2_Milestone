@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:32:49 by afailde-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:38:11 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:46:46 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_bool	ft_atoi_check(const char *str, int *result, int *str_index)
 	while (ft_isdigit(str[*str_index]))
 	{
 		temp_result = (temp_result * 10) + str[*str_index] - '0';
-		if ((sign == 1 && temp_result > (long)INT_MAX) ||
-		(sign == -1 && -temp_result < (long)INT_MIN))
+		if ((sign == 1 && temp_result > (long)INT_MAX)
+			|| (sign == -1 && - temp_result < (long)INT_MIN))
 			return (FALSE);
 		*str_index = *str_index + 1;
 	}
@@ -75,7 +75,7 @@ static t_bool	indexer(t_stacks stacks)
 	{
 		index = 0;
 		compare_node = stacks.stack_a.node;
-		while(compare_node)
+		while (compare_node)
 		{
 			if (compare_node->nbr < current_node->nbr)
 				index++;
@@ -107,7 +107,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (printf("Error\n"), 1);
-	
 	if (is_sorted(&stacks.stack_a) == FALSE)
 		sorter(&stacks, stacks.stack_a.size);
 	stack_clean(&stacks.stack_a.node);
