@@ -1,0 +1,69 @@
+// liinne
+
+// ""
+// 11
+// 22
+// 33
+
+// total_storage = 112233'\0'
+
+// map=
+// 11
+// 22
+// 33
+// NULL
+
+This checks the characters in function check characters.
+
+	ft_printf("Checking character: %c at [%d, %d]\n", game->map[y][x], y, x);
+
+
+
+Print de Map
+// while (game->map[i])
+// {
+// 	ft_printf("%s\n", game->map[i]);
+// 	i++;
+// }
+
+
+
+Apuntes de Ines
+// char **hola -> hola -> esto es un char **
+// 11
+// 22
+// 33
+
+// char **hola -> hola[1] -> esto es un char *
+// 2º 22
+
+// 11
+// 22 <- pasas este
+// 33
+
+// char **hola -> *hola -> esto es un char *
+// 1º 11 
+
+// 11   <- pasas este
+// 22
+// 33
+
+// char **hola -> &hola -> esto es un char ***
+// direccion de memoria que apunta a ->
+// 11
+// 22
+// 33
+
+
+
+// int i;
+	// i = 0;
+	
+	// while (game.map[i])
+	// {
+	// 	printf("%s\n", game.map[i]);
+	// 	i++;
+	// }
+
+El doble puntero es básicamente para poder modificar el contenedor del sitio al que estamos apuntando,
+un solo puntero nos marca la referencia de unos contenidos.
