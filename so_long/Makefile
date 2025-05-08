@@ -6,7 +6,7 @@
 #    By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/13 11:41:52 by afailde-          #+#    #+#              #
-#    Updated: 2025/05/08 20:21:30 by afailde-         ###   ########.fr        #
+#    Updated: 2025/05/08 21:27:46 by afailde-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,9 @@ CLEAN_FILES	=	clean_up_graphics.c
 GAME_FILES	=	init_mlx.c \
 				player.c \
 				player_moves.c \
-				collectibles.c
+				collectibles.c \
+				collectible_resize.c \
+				tiles.c
 
 #Checker files
 CHECKER_FILES 	= 	check_extension.c

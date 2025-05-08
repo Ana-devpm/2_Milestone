@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:40:18 by afailde-          #+#    #+#             */
-/*   Updated: 2025/05/08 20:23:36 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:26:40 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ typedef struct s_player
 
 typedef struct s_tile_text
 {
-	mlx_texture_t	*fence1;
-	mlx_texture_t	*fence2;
-	mlx_texture_t	*floor;
+	mlx_image_t		*image;
+	mlx_texture_t	*frame;
+	int32_t			pos_x;
+	int32_t			pos_y;
 	
 }	t_tile_text;
 
@@ -67,16 +68,16 @@ typedef struct s_game
 	t_player		player;			// Player
 	t_collectible	*collect;		// Array for Collectibles.
 	int				total_collect;	// Total number of collectibles. 
-	
+	t_tile_text		*tiles;			// Ground tiles.
 }	t_game;
 
 //SOURCES FOR SO_LONG
-t_bool			create_map(int fd, t_game *game);
+t_bool		create_map(int fd, t_game *game);
 
 //BUILDING MAP
-t_bool			build_map(int fd, t_game *game);
-t_bool			read_map(int fd, char **total_storage);
-t_bool			check_total_storage(char *total_storage);
+t_bool		build_map(int fd, t_game *game);
+t_bool		read_map(int fd, char **total_storage);
+t_bool		check_total_storage(char *total_storage);
 
 //PARSEC MAP FILES
 t_bool		check_extension(int argc, char **argv);
@@ -103,6 +104,10 @@ void		clean_up_everything(t_game *game);
 //WINDOW UTILS
 t_bool 		init_mlx(t_game *game);
 
+//FLOOR TILES
+t_bool		initialize_floor(t_game *game);
+t_bool		draw_floor(t_game *game);
+t_bool		render_floor_tiles(t_game *game);
 
 //PLAYER FILES
 void 		ft_keys(void *param);
@@ -121,5 +126,5 @@ t_bool 		find_collectibles_in_map(char **map, t_collectible *collect, int *k);
 t_bool		malloc_collectibles(t_game *game);
 t_bool		load_collectible_textures(t_game *game);
 t_bool 		initialize_collectibles(t_game *game);
-
+t_bool 		resize_collectible_image(t_game *game, int i);
 #endif

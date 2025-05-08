@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:18:59 by afailde-          #+#    #+#             */
-/*   Updated: 2025/05/08 20:28:22 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:52:33 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,13 @@ t_bool	load_collectible_textures(t_game *game)
 	{
 		game->collect[i].frame = mlx_load_png("sprites/collectible.png");
 		if (!game->collect[i].frame)
-		{
-			ft_printf("Error: couldn't load texture for collectibles");
 			return (FALSE);
-		}
 		game->collect[i].image = mlx_texture_to_image(game->mlx, game->collect[i].frame);
 		if (!game->collect[i].image)
-		{
-			ft_printf("Error: couldn't load image for collectibles");
 			return (FALSE);
-		}
+		if (resize_collectible_image(game, i) == FALSE)
+			return (FALSE);
+		
 		mlx_image_to_window(game->mlx, game->collect[i].image,
             game->collect[i].pos_x * TILE_SIZE,
             game->collect[i].pos_y * TILE_SIZE);

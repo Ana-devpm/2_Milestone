@@ -6,7 +6,7 @@
 /*   By: afailde- <afailde-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 10:06:57 by afailde-          #+#    #+#             */
-/*   Updated: 2025/05/08 20:29:37 by afailde-         ###   ########.fr       */
+/*   Updated: 2025/05/08 21:26:52 by afailde-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ t_bool init_mlx(t_game *game)
 		ft_printf("Error: couldn't load window");
 		return (FALSE);
 	}
+	initialize_floor(game);
 	init_player(game);
 	initialize_collectibles(game);
+
 	mlx_loop_hook(game->mlx, ft_keys, game);
 	mlx_loop(game->mlx);
 	clean_up_everything(game);
